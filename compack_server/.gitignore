@@ -12,10 +12,20 @@ build/
 # Test related files
 coverage/
 
-# Directory created by dartdoc
-doc/api/
-**/doc/api/
-
-# IntelliJ
-.idea/
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
 .DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/

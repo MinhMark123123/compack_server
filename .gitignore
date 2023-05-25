@@ -19,3 +19,6 @@ doc/api/
 # IntelliJ
 .idea/
 .DS_Store
+
+#melos
+pubspec_overrides.yaml

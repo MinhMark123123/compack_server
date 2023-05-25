@@ -24,3 +24,16 @@ Run script : `touch routes/[nameYourRoute].dart`
 
 Run script : `mason make very_good_dart_package --project_name "your_package_name" --description "Your description of this package" -o 
 packages`
+
+### run database
+
+```shell
+DB_SSL=false DB_NAME=MyDatabase DB_PASSWORD=changeLater dart run stormberry migrate
+```
+```shell
+stormberry_migrate.sh
+```
+
+```shell
+dart run build_runner build --delete-conflicting-outputs
+```

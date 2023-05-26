@@ -1,6 +1,6 @@
-import 'package:compack_server/src/database/database_config.dart';
-import 'package:compack_server/src/database/database_service.dart';
+
 import 'package:dart_frog/dart_frog.dart';
+import 'package:database_service/database_service.dart';
 
 final _dataBaseConfig = MyDatabaseConfig();
 

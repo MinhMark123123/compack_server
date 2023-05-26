@@ -31,7 +31,7 @@ packages`
 DB_SSL=false DB_NAME=MyDatabase DB_PASSWORD=changeLater dart run stormberry migrate
 ```
 ```shell
-stormberry_migrate.sh
+sh stormberry_migrate.sh
 ```
 
 ```shell

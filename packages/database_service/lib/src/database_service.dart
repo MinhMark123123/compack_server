@@ -1,9 +1,9 @@
-import 'package:compack_server/src/database/database_config.dart';
+import 'package:database_service/src/database_config.dart';
 import 'package:stormberry/stormberry.dart';
 
 
 
-typedef Future<dynamic> DatabaseScope(Database database);
+typedef DatabaseScope = Future<dynamic> Function(Database database);
 
 /// {@template database_service}
 /// Database Service for other packages

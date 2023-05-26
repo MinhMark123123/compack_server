@@ -1,17 +1,18 @@
-import 'package:compack_server/src/auth_service/data/auth_data_source.dart';
-import 'package:compack_server/src/auth_service/data/entities/user_entity.dart';
-import 'package:compack_server/src/auth_service/data/models/models.dart';
-import 'package:compack_server/src/database/database_service.dart';
+
+import 'package:auth_service/src/data/auth_data_source.dart';
+import 'package:auth_service/src/data/entities/user_entity.dart';
+import 'package:auth_service/src/data/models/models.dart';
+import 'package:database_service/database_service.dart';
 import 'package:stormberry/stormberry.dart';
 
 /// {@template auth_postgres_data_source}
 /// Desctiption.
 /// {@endtemplate}
 class AuthPostgresDataSource implements AuthDataSource {
-  final DatabaseService databaseService;
 
   /// {@macro auth_postgres_data_source}
   const AuthPostgresDataSource({required this.databaseService});
+  final DatabaseService databaseService;
 
   @override
   Future<UserEntityView?> findUserByEmail({required String email}) async {

@@ -1,9 +1,7 @@
-import 'package:compack_server/src/auth_service/auth_config.dart';
-import 'package:compack_server/src/auth_service/auth_service.dart';
-import 'package:compack_server/src/auth_service/data/auth_data_source.dart';
-import 'package:compack_server/src/auth_service/data/auth_postgres_data_source.dart';
-import 'package:compack_server/src/database/database_service.dart';
+
+import 'package:auth_service/auth_service.dart';
 import 'package:dart_frog/dart_frog.dart';
+import 'package:database_service/database_service.dart';
 
 const _emailPattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
 const _passwordPattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$'; //https://stackoverflow.com/a/56256456

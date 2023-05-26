@@ -1,5 +1,7 @@
-import 'package:compack_server/src/auth_service/data/entities/user_entity.dart';
-import 'package:compack_server/src/auth_service/data/models/models.dart';
+
+
+import 'package:auth_service/src/data/entities/user_entity.dart';
+import 'package:auth_service/src/data/models/models.dart';
 
 /// {@template auth_data_source}
 /// Desctiption.

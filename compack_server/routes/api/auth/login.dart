@@ -1,6 +1,5 @@
 import 'dart:io';
-import 'package:compack_server/src/auth_service/auth_service.dart';
-import 'package:compack_server/src/auth_service/exception/index.dart';
+import 'package:auth_service/auth_service.dart';
 import 'package:dart_frog/dart_frog.dart';
 
 Future<Response> onRequest(RequestContext context) async {

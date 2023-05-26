@@ -1,0 +1,6 @@
+targets:
+  $default:
+    builders:
+      stormberry:
+        generate_for:
+          - ../packages/auth_service/lib/src/data/**/*.dart

@@ -3,14 +3,17 @@ repository: https://github.com/MinhMark123123/compack_server
 
 
 packages:
-  # Include the package in the workspace root.
-  - .
+  - compack_server
   # Include all packages inside the `packages` directory that are direct children.
   - packages/*
   # Include all packages inside the `packages` directory and all descendants.
   - packages/**
 
 scripts:
+  pub-get:
+    exec: dart pub get
+    description: Run all static analysis checks.
+
   int:all:
     run: melos run analyze && melos run format
     description: Run all static analysis checks.
@@ -56,3 +59,7 @@ scripts:
     packageFilters:
       dirExists: test
     description: Generate coverage for the selected package.
+
+  create-dart-package:
+    run: sh create_dart_package.sh
+    description: Run create package with mason.

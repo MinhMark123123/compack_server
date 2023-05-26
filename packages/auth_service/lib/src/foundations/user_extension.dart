@@ -1,12 +1,12 @@
 
-import 'package:compack_server/src/auth_service/auth_config.dart';
-import 'package:compack_server/src/auth_service/data/models/models.dart';
-import 'package:compack_server/src/auth_service/exception/index.dart';
+import 'package:auth_service/src/auth_config.dart';
+import 'package:auth_service/src/data/models/models.dart';
+import 'package:auth_service/src/exception/index.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 extension UserExtension on User {
   User genAndApplyToken(AuthConfig config) {
-    assert(id != null, "id must not be null");
+    assert(id != null, 'id must not be null');
     final jwTAccessToken = JWT(
       {
         'id': id,

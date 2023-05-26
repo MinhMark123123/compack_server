@@ -1,10 +1,10 @@
-import 'package:compack_server/src/auth_service/auth_config.dart';
-import 'package:compack_server/src/auth_service/data/auth_data_source.dart';
-import 'package:compack_server/src/auth_service/data/entities/user_entity.dart';
-import 'package:compack_server/src/auth_service/data/models/models.dart';
-import 'package:compack_server/src/auth_service/exception/index.dart';
-import 'package:compack_server/src/auth_service/foundations/user_extension.dart';
-import 'package:compack_server/src/auth_service/foundations/validate.dart';
+import 'package:auth_service/src/auth_config.dart';
+import 'package:auth_service/src/data/auth_data_source.dart';
+import 'package:auth_service/src/data/entities/user_entity.dart';
+import 'package:auth_service/src/data/models/models.dart';
+import 'package:auth_service/src/exception/index.dart';
+import 'package:auth_service/src/foundations/foundations.dart';
+import 'package:auth_service/src/foundations/user_extension.dart';
 import 'package:uuid/uuid.dart';
 
 /// {@template auth_service}

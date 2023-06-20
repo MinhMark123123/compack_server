@@ -3,6 +3,15 @@
 #    builders:
 #      stormberry:
 #        generate_for:
+#          - lib/src/data/entities/*.dart
+
+
+
+#targets:
+#  $default:
+#    builders:
+#      stormberry:
+#        generate_for:
 #          - lib/src/data/**/entities/*.dart
 #          #- lib/src/data/**/*_entity.dart
 #          #- ../packages/auth_service/lib/src/data/**/*.dart

@@ -24,7 +24,7 @@ class _UserEntityRepository extends BaseRepository
         RepositoryUpdateMixin<UserEntityUpdateRequest>,
         RepositoryDeleteMixin<String>
     implements UserEntityRepository {
-  _UserEntityRepository(super.db) : super(tableName: 'Account', keyName: 'id');
+  _UserEntityRepository(super.db) : super(tableName: 'User', keyName: 'id');
 
   @override
   Future<UserEntityView?> queryUserEntity(String id) {
@@ -41,8 +41,8 @@ class _UserEntityRepository extends BaseRepository
     if (requests.isEmpty) return;
     var values = QueryValues();
     await db.query(
-      'INSERT INTO "Account" ( "id", "email", "phone", "password", "role", "token", "refresh_token", "time_created", "last_logon_time", "last_time_update" )\n'
-      'VALUES ${requests.map((r) => '( ${values.add(r.id)}:text, ${values.add(r.email)}:text, ${values.add(r.phone)}:text, ${values.add(r.password)}:text, ${values.add(r.role)}:int8, ${values.add(r.token)}:text, ${values.add(r.refreshToken)}:text, ${values.add(r.timeCreated)}:timestamp, ${values.add(r.lastLogonTime)}:timestamp, ${values.add(r.lastTimeUpdate)}:timestamp )').join(', ')}\n',
+      'INSERT INTO "User" ( "id", "email", "phone", "password", "token", "refresh_token", "time_created", "last_logon_time", "last_time_update" )\n'
+      'VALUES ${requests.map((r) => '( ${values.add(r.id)}:text, ${values.add(r.email)}:text, ${values.add(r.phone)}:text, ${values.add(r.password)}:text, ${values.add(r.token)}:text, ${values.add(r.refreshToken)}:text, ${values.add(r.timeCreated)}:timestamp, ${values.add(r.lastLogonTime)}:timestamp, ${values.add(r.lastTimeUpdate)}:timestamp )').join(', ')}\n',
       values.values,
     );
   }
@@ -52,11 +52,11 @@ class _UserEntityRepository extends BaseRepository
     if (requests.isEmpty) return;
     var values = QueryValues();
     await db.query(
-      'UPDATE "Account"\n'
-      'SET "email" = COALESCE(UPDATED."email", "Account"."email"), "phone" = COALESCE(UPDATED."phone", "Account"."phone"), "password" = COALESCE(UPDATED."password", "Account"."password"), "role" = COALESCE(UPDATED."role", "Account"."role"), "token" = COALESCE(UPDATED."token", "Account"."token"), "refresh_token" = COALESCE(UPDATED."refresh_token", "Account"."refresh_token"), "time_created" = COALESCE(UPDATED."time_created", "Account"."time_created"), "last_logon_time" = COALESCE(UPDATED."last_logon_time", "Account"."last_logon_time"), "last_time_update" = COALESCE(UPDATED."last_time_update", "Account"."last_time_update")\n'
-      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:text::text, ${values.add(r.email)}:text::text, ${values.add(r.phone)}:text::text, ${values.add(r.password)}:text::text, ${values.add(r.role)}:int8::int8, ${values.add(r.token)}:text::text, ${values.add(r.refreshToken)}:text::text, ${values.add(r.timeCreated)}:timestamp::timestamp, ${values.add(r.lastLogonTime)}:timestamp::timestamp, ${values.add(r.lastTimeUpdate)}:timestamp::timestamp )').join(', ')} )\n'
-      'AS UPDATED("id", "email", "phone", "password", "role", "token", "refresh_token", "time_created", "last_logon_time", "last_time_update")\n'
-      'WHERE "Account"."id" = UPDATED."id"',
+      'UPDATE "User"\n'
+      'SET "email" = COALESCE(UPDATED."email", "User"."email"), "phone" = COALESCE(UPDATED."phone", "User"."phone"), "password" = COALESCE(UPDATED."password", "User"."password"), "token" = COALESCE(UPDATED."token", "User"."token"), "refresh_token" = COALESCE(UPDATED."refresh_token", "User"."refresh_token"), "time_created" = COALESCE(UPDATED."time_created", "User"."time_created"), "last_logon_time" = COALESCE(UPDATED."last_logon_time", "User"."last_logon_time"), "last_time_update" = COALESCE(UPDATED."last_time_update", "User"."last_time_update")\n'
+      'FROM ( VALUES ${requests.map((r) => '( ${values.add(r.id)}:text::text, ${values.add(r.email)}:text::text, ${values.add(r.phone)}:text::text, ${values.add(r.password)}:text::text, ${values.add(r.token)}:text::text, ${values.add(r.refreshToken)}:text::text, ${values.add(r.timeCreated)}:timestamp::timestamp, ${values.add(r.lastLogonTime)}:timestamp::timestamp, ${values.add(r.lastTimeUpdate)}:timestamp::timestamp )').join(', ')} )\n'
+      'AS UPDATED("id", "email", "phone", "password", "token", "refresh_token", "time_created", "last_logon_time", "last_time_update")\n'
+      'WHERE "User"."id" = UPDATED."id"',
       values.values,
     );
   }
@@ -68,7 +68,6 @@ class UserEntityInsertRequest {
     this.email,
     this.phone,
     this.password,
-    this.role,
     this.token,
     this.refreshToken,
     this.timeCreated,
@@ -80,7 +79,6 @@ class UserEntityInsertRequest {
   final String? email;
   final String? phone;
   final String? password;
-  final int? role;
   final String? token;
   final String? refreshToken;
   final DateTime? timeCreated;
@@ -94,7 +92,6 @@ class UserEntityUpdateRequest {
     this.email,
     this.phone,
     this.password,
-    this.role,
     this.token,
     this.refreshToken,
     this.timeCreated,
@@ -106,7 +103,6 @@ class UserEntityUpdateRequest {
   final String? email;
   final String? phone;
   final String? password;
-  final int? role;
   final String? token;
   final String? refreshToken;
   final DateTime? timeCreated;
@@ -122,11 +118,11 @@ class UserEntityViewQueryable extends KeyedViewQueryable<UserEntityView, String>
   String encodeKey(String key) => TextEncoder.i.encode(key);
 
   @override
-  String get query => 'SELECT "Account".*'
-      'FROM "Account"';
+  String get query => 'SELECT "User".*'
+      'FROM "User"';
 
   @override
-  String get tableAlias => 'Account';
+  String get tableAlias => 'User';
 
   @override
   UserEntityView decode(TypedMap map) => UserEntityView(
@@ -134,7 +130,6 @@ class UserEntityViewQueryable extends KeyedViewQueryable<UserEntityView, String>
       email: map.getOpt('email'),
       phone: map.getOpt('phone'),
       password: map.getOpt('password'),
-      role: map.getOpt('role'),
       token: map.getOpt('token'),
       refreshToken: map.getOpt('refresh_token'),
       timeCreated: map.getOpt('time_created'),
@@ -148,7 +143,6 @@ class UserEntityView {
     this.email,
     this.phone,
     this.password,
-    this.role,
     this.token,
     this.refreshToken,
     this.timeCreated,
@@ -160,7 +154,6 @@ class UserEntityView {
   final String? email;
   final String? phone;
   final String? password;
-  final int? role;
   final String? token;
   final String? refreshToken;
   final DateTime? timeCreated;

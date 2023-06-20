@@ -11,6 +11,9 @@
       <excludeFolder url="file://$MODULE_DIR$/compack_server/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/compack_server/build" />
       <excludeFolder url="file://$MODULE_DIR$/compack_server/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/compack_server/packages/user_profile/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/compack_server/packages/user_profile/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/compack_server/packages/user_profile/build" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />

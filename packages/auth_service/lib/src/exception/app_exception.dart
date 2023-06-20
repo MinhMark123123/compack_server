@@ -3,7 +3,7 @@ import 'dart:io';
 enum AppException implements Exception {
   unauthorized(code: HttpStatus.unauthorized, message: 'Unauthorized'),
   tokenExpried(code: HttpStatus.unauthorized, message: 'Token Expired'),
-  tokenInvalid(code: HttpStatus.unauthorized, message: 'Password Invalid'),
+  tokenInvalid(code: HttpStatus.unauthorized, message: 'Token Invalid'),
   noUserFounded(code: HttpStatus.unauthorized, message: 'No user founded'),
   passwordNotMatch(
     code: HttpStatus.unauthorized,
@@ -13,6 +13,10 @@ enum AppException implements Exception {
   passwordInvalid(
     code: HttpStatus.internalServerError,
     message: 'Password Invalid',
+  ),
+  refreshTokenInvalid(
+    code: HttpStatus.internalServerError,
+    message: 'Refresh Token invalid',
   );
 
   const AppException({

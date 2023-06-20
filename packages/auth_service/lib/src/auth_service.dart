@@ -1,10 +1,9 @@
 import 'package:auth_service/src/auth_config.dart';
-import 'package:auth_service/src/data/auth_data_source.dart';
-import 'package:auth_service/src/data/entities/user_entity.dart';
-import 'package:auth_service/src/data/models/models.dart';
+import 'package:auth_service/src/data/data.dart';
 import 'package:auth_service/src/exception/index.dart';
 import 'package:auth_service/src/foundations/foundations.dart';
 import 'package:auth_service/src/foundations/user_extension.dart';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:uuid/uuid.dart';
 
 /// {@template auth_service}
@@ -29,7 +28,7 @@ class AuthService {
       return Future.error(errorMessages);
     }
     final userView = await _authDataSource.findUserByEmail(email: email);
-    if(userView != null){
+    if (userView != null) {
       return login(email: email, password: password);
     }
     final account = User()
@@ -86,5 +85,46 @@ class AuthService {
       errorMessages.add(AppException.passwordInvalid);
     }
     return errorMessages;
+  }
+
+  Future<User> verifyToken({required String token}) async{
+    try {
+      final payloadRaw = decodeToken(token);
+      final id = payloadRaw['id'];
+      final exp = payloadRaw['exp'];
+      if (id == null || exp == null) {
+        throw AppException.tokenInvalid;
+      }
+      final timeExp = DateTime.fromMillisecondsSinceEpoch(
+        int.parse(exp.toString()),
+      );
+      if (timeExp.difference(DateTime.now()).isNegative) {
+        throw AppException.tokenExpried;
+      }
+      final user = await findUserById(userId: id as String);
+      if(user.token != token){
+        throw AppException.tokenInvalid;
+      }
+      return user;
+    } catch (e) {
+      print(e);
+      throw AppException.tokenInvalid;
+    }
+  }
+
+  Map<String, dynamic> decodeToken(String token) {
+    final jwt = JWT.verify(token, SecretKey(_authConfig.jwtSecretKey));
+
+    final payloadRaw = jwt.payload as Map<String, dynamic>;
+    return payloadRaw;
+  }
+
+  Future<User> refreshToken(User user) async{
+    final currentTime = DateTime.now();
+    final userResult = user
+      ..genAndApplyToken(_authConfig)
+      ..lastTimeUpdate = currentTime.toIso8601String();
+    final userLogonView = await _authDataSource.updateUser(user: userResult);
+    return userLogonView.toUser();
   }
 }

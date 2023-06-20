@@ -63,3 +63,18 @@ scripts:
   create-dart-package:
     run: sh create_dart_package.sh
     description: Run create package with mason.
+
+  generate:
+    run: melos exec -c 1 --depends-on="build_runner" -- "dart pub run build_runner build --delete-conflicting-outputs" #&& melos run generate:flutter
+    description: Build all generated files for Dart & Flutter packages in this project
+
+  generate-database:
+    run: melos run generate-database:dart #&& melos run generate:flutter
+    description: Build all generated files for Dart & Flutter packages in this project
+
+  generate-database:dart:
+    run: |
+      cd packages/auth_service && pwd && dart pub run build_runner build --delete-conflicting-outputs
+      cd ../../
+      cd compack_server && pwd && dart pub run build_runner build --delete-conflicting-outputs
+    description: Build all generated files for Dart packages in this project.
